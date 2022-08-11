@@ -14,8 +14,6 @@ Clone the source code for the project .Before build the project, please rewrite 
 
 ```
 git clone https://github.com/WXY485/PAINT.git
-cd x86_64-linux-gnu
-sudo cp python3.6m /usr/include/x86_64-linux-gnu
 cd ..
 mkdir build
 cd build
@@ -28,6 +26,6 @@ make
 Move the executable file runpy to the same directory as the txt and exercise.py files.Then we can  run the executable file to get the graph.
 
 ```
-sudo mv runpy /home/.../project/
+sudo mv runpy /home/users/project/
 ./runpy exercise1 paint
 ```
