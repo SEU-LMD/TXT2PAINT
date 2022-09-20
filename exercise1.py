@@ -1,10 +1,12 @@
 # import step, fix the "Module ‘sys‘ Has No Attribute ‘argv‘" bug.
 import sys
 sys.argv=['']
+# self-define python search path to local directory.
+sys.path.append("./lib/python3.6/site-packages")
 
 from matplotlib import pyplot as plt
 import math
-import xlwt
+#import xlwt
 
 
 def EulerAndQuaternionTransform(input_data):
@@ -50,7 +52,7 @@ def EulerAndQuaternionTransform(input_data):
         return [r, p, y]
 
 
-def paint(x=1, y=2):
+def paint(data):
     time = []
     tx = []
     ty = []
@@ -62,9 +64,12 @@ def paint(x=1, y=2):
     roll = []
     pitch = []
     yaw = []
-    with open('07.txt', 'r') as f:
-        data = f.readlines()
+    #with open('07.txt', 'r') as f:
+        #data = f.readlines()
         for i in range(len(data)):
+        data[i] = data[i].strip()
+        if data[i] == "":
+            continue
             temp_data = data[i].split(' ')
             time.append(float(temp_data[0]))
             tx.append(float(temp_data[1]))
@@ -82,14 +87,14 @@ def paint(x=1, y=2):
    # f = xlwt.Workbook()
    # sheet1 = f.add_sheet(u'sheet1', cell_overwrite_ok=True)
    # for i in range(len(tx)):
-      #  sheet1.write(i, 0, time[i])
-      #  sheet1.write(i, 1, tx[i])
-      #  sheet1.write(i, 2, ty[i])
-      # sheet1.write(i, 3, tz[i])
-      #  sheet1.write(i, 4, qx[i])
-      # sheet1.write(i, 5, qy[i])
-      # sheet1.write(i, 6, qz[i])
-      #  sheet1.write(i, 7, qw[i])
+   #     sheet1.write(i, 0, time[i])
+   #     sheet1.write(i, 1, tx[i])
+   #     sheet1.write(i, 2, ty[i])
+   #     sheet1.write(i, 3, tz[i])
+   #     sheet1.write(i, 4, qx[i])
+   #     sheet1.write(i, 5, qy[i])
+   #     sheet1.write(i, 6, qz[i])
+   #     sheet1.write(i, 7, qw[i])
    # f.save('data.xlsx')
 
 
