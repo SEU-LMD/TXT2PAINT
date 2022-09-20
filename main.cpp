@@ -1,88 +1,54 @@
-#include <Python.h>
-
 #include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+#include "test.h"
 using namespace std;
 
-int main(int argc, char *argv[])
-{
-    PyObject *pName, *pModule, *pFunc;
-       PyObject *pArgs, *pValue;
-       int i;
-
-       if (argc < 3) {
-           fprintf(stderr,"Usage: call pythonfile funcname [args]\n");
-           return 1;
-       }
-
-       Py_Initialize();
-
-       PyRun_SimpleString("import sys");
-       PyRun_SimpleString("sys.path.append('./')");
+struct myData {
+	double time;
+	double d[3];
+	double angle[4];
+};
 
 
-       pName = PyUnicode_FromString(argv[1]);
-       /* Error checking of pName left out */
+vector<myData> read_txt(string addr) {
+	vector<myData> res;
+
+	ifstream in_file;
+	in_file.open("07.txt");
+
+	string line;
+	while (getline(in_file, line)) {
+		cout << line.size() << endl;
+		myData t;
+		vector<double> ds;
+		int last = 0;
+		for (int i = 0; i < line.size(); i++) {
+			if (line[i] == ' ') {
+				auto s = line.substr(last, i - last);
+				auto d = stod(s);
+				ds.push_back(d);
+				last = i + 1;
+			}
+		}
+
+		ds.push_back(stod(line.substr(last)));
 
 
-       pModule = PyImport_Import(pName);
-       Py_DECREF(pName);
+		t.time = ds[0];
+		t.d[0] = ds[1], t.d[1] = ds[2], t.d[2] = ds[3];
+		t.angle[0] = ds[4], t.angle[1] = ds[5];
+		t.angle[2] = ds[6], t.angle[3] = ds[7];
+		res.push_back(t);
+	}
+	in_file.close();
+	return res;
+}
 
-       if (pModule != NULL) {
+int main() {
+	auto t = read_txt("07.txt");
+        callPythonDraw(data_set);
+	return 0;
 
-           pFunc = PyObject_GetAttrString(pModule, argv[2]);
-           /* pFunc is a new reference */
-
-           if (pFunc && PyCallable_Check(pFunc)) {
-
-               pArgs = PyTuple_New(0);
-
-               pValue = PyObject_CallObject(pFunc, pArgs);
-
-               Py_DECREF(pArgs);
-           }
-
-
-//               for (i = 0; i < argc - 3; ++i) {
-//                   pValue = PyLong_FromLong(atoi(argv[i + 3]));
-//                   if (!pValue) {
-//                       Py_DECREF(pArgs);
-//                       Py_DECREF(pModule);
-//                       fprintf(stderr, "Cannot convert argument\n");
-//                       return 1;
-//                   }
-
-//                   /* pValue reference stolen here: */
-//                   PyTuple_SetItem(pArgs, i, pValue);
-//               }
-
-//               pValue = PyObject_CallObject(pFunc, pArgs);
-//               Py_DECREF(pArgs);
-               if (pValue != NULL) {
-                   printf("Result of call: %ld\n", PyLong_AsLong(pValue));
-                   Py_DECREF(pValue);
-               }
-               else {
-                   Py_DECREF(pFunc);
-                   Py_DECREF(pModule);
-                   PyErr_Print();
-                   fprintf(stderr,"Call failed\n");
-                   return 1;
-               }
-//           }
-//           else {
-//               if (PyErr_Occurred())
-//                   PyErr_Print();
-//               fprintf(stderr, "Cannot find function \"%s\"\n", argv[2]);
-//           }
-           Py_XDECREF(pFunc);
-           Py_DECREF(pModule);
-       }
-       else {
-           PyErr_Print();
-           fprintf(stderr, "Failed to load \"%s\"\n", argv[1]);
-           return 1;
-       }
-
-       Py_Finalize();
-       return 0;
 }

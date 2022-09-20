@@ -5,7 +5,7 @@ project(cppCallPythonFunc)
  
 # 用locate Python.h 取得头文件的位置之后可以使用 #include <Python.h>
 include_directories(
-   "/home/wxy/project/python3.6"
+   "${CMAKE_CURRENT_SOURCE_DIR}/python3.6"
 )
 
  
@@ -13,9 +13,14 @@ include_directories(
 #-L/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu -L/usr/lib -lpython3.6m -lpthread -ldl  -lutil -lm  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions
  
 # 添加动态库的位置
-LINK_DIRECTORIES("/home/wxy/project/python3.6-lio")
-# LINK_DIRECTORIES("/usr/lib")
+LINK_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}/python3.6-lio")
+#LINK_DIRECTORIES("${CURRENT_FOLDER}/python3.6-lio")
+#LINK_DIRECTORIES("/usr/lib")
  
-add_executable(runpy main.cpp exercise1.py)
+add_executable(runpy test2.cpp exercise1.py)
 target_link_libraries(runpy -lpython3.6m)
-
+#add_library(test SHARED test2.cpp)
+#add_library(draw SHARED exerecise1.py)
+#target_link_libraries(test -lpython3.6m)
+SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
+#SET(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
