@@ -1,0 +1,3 @@
+/home/wxy/draw/build/CMakeFiles/edit_cache.dir
+/home/wxy/draw/build/CMakeFiles/rebuild_cache.dir
+/home/wxy/draw/build/CMakeFiles/runpy.dir

@@ -2,9 +2,11 @@
 import sys
 sys.argv=['']
 # self-define python search path to local directory.
-sys.path.append("./lib/python3.6/site-packages")
+sys.path.append("./python-3.5/lib/python3.5/site-packages")
 
 from matplotlib import pyplot as plt
+from matplotlib import animation as animation
+from mpl_toolkits.mplot3d import Axes3D
 import math
 #import xlwt
 
@@ -52,7 +54,7 @@ def EulerAndQuaternionTransform(input_data):
         return [r, p, y]
 
 
-def paint(data):
+def paint(data): 
     time = []
     tx = []
     ty = []
@@ -66,114 +68,174 @@ def paint(data):
     yaw = []
     #with open('07.txt', 'r') as f:
         #data = f.readlines()
-        for i in range(len(data)):
-        data[i] = data[i].strip()
-        if data[i] == "":
-            continue
-            temp_data = data[i].split(' ')
-            time.append(float(temp_data[0]))
-            tx.append(float(temp_data[1]))
-            ty.append(float(temp_data[2]))
-            tz.append(float(temp_data[3]))
-            temp_q = EulerAndQuaternionTransform([tx[-1], ty[-1], tz[-1]])
-            qx.append(temp_q[0])
-            qy.append(temp_q[1])
-            qz.append(temp_q[2])
-            qw.append(temp_q[3])
-            roll.append(float(temp_data[-3]))
-            pitch.append(float(temp_data[-2]))
-            yaw.append(float(temp_data[-1]))
+    #print("data_len:",len(data))
+    plt.ion()
+    for i in range(len(data)):
+        plt.clf()
+        temp_data = data[i].split(' ')
+        time.append(float(temp_data[0]))
+        tx.append(float(temp_data[1]))
+        ty.append(float(temp_data[2]))
+        tz.append(float(temp_data[3]))
+        temp_q = EulerAndQuaternionTransform([tx[-1], ty[-1], tz[-1]])
+        qx.append(temp_q[0])
+        qy.append(temp_q[1])
+        qz.append(temp_q[2])
+        qw.append(temp_q[3])
+        roll.append(float(temp_data[-3]))
+        pitch.append(float(temp_data[-2]))
+        yaw.append(float(temp_data[-1]))
 
-   # f = xlwt.Workbook()
-   # sheet1 = f.add_sheet(u'sheet1', cell_overwrite_ok=True)
-   # for i in range(len(tx)):
-   #     sheet1.write(i, 0, time[i])
-   #     sheet1.write(i, 1, tx[i])
-   #     sheet1.write(i, 2, ty[i])
-   #     sheet1.write(i, 3, tz[i])
-   #     sheet1.write(i, 4, qx[i])
-   #     sheet1.write(i, 5, qy[i])
-   #     sheet1.write(i, 6, qz[i])
-   #     sheet1.write(i, 7, qw[i])
-   # f.save('data.xlsx')
-
-
-    fig1, axs = plt.subplots(3, 1)
-    axs[0].scatter(time, tx, marker='o', c='r', s=1)
-    axs[0].set_ylabel('tx(m)')
-    axs[1].scatter(time, ty, marker='o', c='y', s=1)
-    axs[1].set_ylabel('ty(m)')
-    axs[2].scatter(time, tz, marker='o', c='b', s=1)
-    axs[2].set_ylabel('tz(m)')
-    axs[2].set_xlabel('time(s)')
-    axs[0].set_title('xyz scatter view')
-    plt.savefig('xyz scatter view.png')
+        #tx-ty 
+        plt.plot(tx, ty, c='r')
+        plt.xlabel('tx')
+        plt.ylabel('tz')
+        plt.title('tx-ty')
+        plt.savefig('tx-ty')
+        
+        plt.pause(0.01)
+        plt.ioff()
     plt.show()
+        
+        #sanwei guiji
+        #fig = plt.figure()
+        #axs = fig.gca(projection = '3d')
+        #plt.clf()
+        #axs.plot(tx, ty, tz)
+        #axs.set_xlabel('tx(m)')
+        #axs.set_ylabel('ty(m)')
+        #axs.set_zlabel('tz(m)')
+        #axs.set_title('xyz line.view')
+        #plt.savefig('xyz line.png')
+        #plt.pause(0.01)
+        #plt.ioff()
+    #plt.show()
 
-    fig2, axs = plt.subplots(4, 1)
-    axs[0].scatter(time, qx, marker='o', c='r', s=1)
-    axs[0].set_ylabel('qx(m)')
-    axs[1].scatter(time, qy, marker='o', c='y', s=1)
-    axs[1].set_ylabel('qy(m)')
-    axs[2].scatter(time, qz, marker='o', c='b', s=1)
-    axs[2].set_ylabel('qz(m)')
-    axs[3].scatter(time, qw, marker='o', c='k', s=1)
-    axs[3].set_ylabel('qw(m)')
-    axs[3].set_xlabel('time(s)')
-    axs[0].set_title('qxyzw scatter view')
-    plt.savefig('qxyzw scatter view.png')
-    plt.show()
 
-    fig3, axs = plt.subplots(3, 1)
-    axs[0].scatter(time, roll, marker='o', c='r', s=1)
-    axs[0].set_ylabel('roll(m)')
-    axs[1].scatter(time, pitch, marker='o', c='y', s=1)
-    axs[1].set_ylabel('pitch(m)')
-    axs[2].scatter(time, yaw, marker='o', c='b', s=1)
-    axs[2].set_ylabel('yaw(m)')
-    axs[2].set_xlabel('time(s)')
-    axs[0].set_title('pry scatter view')
-    plt.savefig('pry scatter view.png')
-    plt.show()
 
-    fig4, axs = plt.subplots(3, 1)
-    axs[0].plot(time, tx, c='r')
-    axs[0].set_ylabel('tx(m)')
-    axs[1].plot(time, ty, c='y')
-    axs[1].set_ylabel('ty(m)')
-    axs[2].plot(time, tz, c='b')
-    axs[2].set_ylabel('tz(m)')
-    axs[2].set_xlabel('time(s)')
-    axs[0].set_title('xyz line view')
-    plt.savefig('xyz line view.png')
-    plt.show()
 
-    fig5, axs = plt.subplots(4, 1)
-    axs[0].plot(time, qx, c='r')
-    axs[0].set_ylabel('qx(m)')
-    axs[1].plot(time, qy, c='y')
-    axs[1].set_ylabel('qy(m)')
-    axs[2].plot(time, qz, c='b')
-    axs[2].set_ylabel('qz(m)')
-    axs[3].plot(time, qw, c='k')
-    axs[3].set_ylabel('qw(m)')
-    axs[3].set_xlabel('time(s)')
-    axs[0].set_title('qxyzw line view')
-    plt.savefig('qxyzw line view.png')
-    plt.show()
 
-    fig6, axs = plt.subplots(3, 1)
-    axs[0].plot(time, roll, c='r')
-    axs[0].set_ylabel('roll(m)')
-    axs[1].plot(time, pitch, c='y')
-    axs[1].set_ylabel('pitch(m)')
-    axs[2].plot(time, yaw, c='b')
-    axs[2].set_ylabel('yaw(m)')
-    axs[2].set_xlabel('time(s)')
-    axs[0].set_title('pry line view')
-    plt.savefig('pry line view.png')
-    plt.show()
 
+
+
+
+    #fig1, axs = plt.subplots(3, 1)
+    #axs[0].scatter(time, tx, marker='o', c='r', s=1)
+    #axs[0].set_ylabel('tx(m)')
+    #axs[1].scatter(time, ty, marker='o', c='y', s=1)
+    #axs[1].set_ylabel('ty(m)')
+    #axs[2].scatter(time, tz, marker='o', c='b', s=1)
+    #axs[2].set_ylabel('tz(m)')
+    #axs[2].set_xlabel('time(s)')
+    #axs[0].set_title('xyz scatter view')
+    #plt.savefig('xyz scatter view.png')
+    #plt.show()
+    #time.sleep(0.001)
+    
+    #fig = plt.figure()
+    #axs = fig.gca(projection = '3d')
+    #axs.plot(tx, ty, tz)
+    #axs.set_xlabel('tx(m)')
+    #axs.set_ylabel('ty(m)')
+    #axs.set_zlabel('tz(m)')
+    #axs.set_title('pry line view')
+    #plt.savefig('pry line view.png')
+    #plt.show()
+    
+
+    #axs = Axes3D(fig)
+    #axs.set_title('dongtai guiji')
+    #axs.set_xlabel("X")
+    #axs.set_xlabel("Y")
+    #axs.set_xlabel("Z")
+    #for i in range(len(data)):
+    #axs.set_title('dongtai guiji')
+    #axs.set_xlabel("X")
+    #axs.set_xlabel("Y")
+    #axs.set_xlabel("Z")
+    #x= lx[i]
+
+    #tx-ty 
+    #fig = plt.figure()
+    #plt.plot(tx, ty, c='r')
+    #point_ani,=plt.plot(tx[0], ty[0], "r-")
+    #text_pt = plt.text(3.5, 0.8, '', fontsize=16)
+    #plt.xlabel('tx')
+    #plt.ylabel('tz')
+    #plt.title('tx-ty')
+    #plt.savefig('tx-ty')
+    #plt.show()
+    
+            #fig2, axs = plt.subplots(4, 1)
+            #axs[0].scatter(time, qx, marker='o', c='r', s=1)
+            #axs[0].set_ylabel('qx(m)')
+            #axs[1].scatter(time, qy, marker='o', c='y', s=1)
+            #axs[1].set_ylabel('qy(m)')
+            #axs[2].scatter(time, qz, marker='o', c='b', s=1)
+            #axs[2].set_ylabel('qz(m)')
+            #axs[3].scatter(time, qw, marker='o', c='k', s=1)
+            #axs[3].set_ylabel('qw(m)')
+            #axs[3].set_xlabel('time(s)')
+            #axs[0].set_title('qxyzw scatter view')
+            #plt.savefig('qxyzw scatter view.png')
+            #plt.show()
+
+            #fig3, axs = plt.subplots(3, 1)
+            #axs[0].scatter(time, roll, marker='o', c='r', s=1)
+            #axs[0].set_ylabel('roll(m)')
+            #axs[1].scatter(time, pitch, marker='o', c='y', s=1)
+            #axs[1].set_ylabel('pitch(m)')
+            #axs[2].scatter(time, yaw, marker='o', c='b', s=1)
+            #axs[2].set_ylabel('yaw(m)')
+            #axs[2].set_xlabel('time(s)')
+            #axs[0].set_title('pry scatter view')
+            #plt.savefig('pry scatter view.png')
+            #plt.show()
+
+    #fig4, axs = plt.subplots(3, 1)
+    #axs[0].plot(time, tx, c='r')
+    #axs[0].set_ylabel('tx(m)')
+    #axs[1].plot(time, ty, c='y')
+    #axs[1].set_ylabel('ty(m)')
+    #axs[2].plot(time, tz, c='b')
+    #axs[2].set_ylabel('tz(m)')
+    #axs[2].set_xlabel('time(s)')
+    #axs[0].set_title('xyz line view')
+    #plt.savefig('xyz line view.png')
+    #plt.show()
+    #time.sleep(0.001)
+
+            #fig5, axs = plt.subplots(4, 1)
+            #axs[0].plot(time, qx, c='r')
+            #axs[0].set_ylabel('qx(m)')
+            #axs[1].plot(time, qy, c='y')
+            #axs[1].set_ylabel('qy(m)')
+            #axs[2].plot(time, qz, c='b')
+            #axs[2].set_ylabel('qz(m)')
+            #axs[3].plot(time, qw, c='k')
+            #axs[3].set_ylabel('qw(m)')
+            #axs[3].set_xlabel('time(s)')
+            #axs[0].set_title('qxyzw line view')
+            #plt.savefig('qxyzw line view.png')
+            #plt.show()
+
+            #fig6, axs = plt.subplots(3, 1)
+            #axs[0].plot(time, roll, c='r')
+            #axs[0].set_ylabel('roll(m)')
+            #axs[1].plot(time, pitch, c='y')
+            #axs[1].set_ylabel('pitch(m)')
+            #axs[2].plot(time, yaw, c='b')
+            #axs[2].set_ylabel('yaw(m)')
+            #axs[2].set_xlabel('time(s)')
+            #axs[0].set_title('pry line view')
+            #plt.savefig('pry line view.png')
+            #plt.show()
+    #plt.pause(0.02)
+    #plt.clf()
+    #print("end")
+    #return 2
 
 if __name__ == "__main__":
     paint()
+#def main(_):
+    #paint()
