@@ -18,7 +18,7 @@ git clone https://github.com/SEU-LMD/TXT2PAINT.git
 “/home/wxy/draw/x86_64-linux-gnu/python3.5m/pyconfig.h”
 ```
 
-![](C:\Users\29390\Desktop\1.PNG)
+!([picture](https://github.com/SEU-LMD/TXT2PAINT/2.PNG)/2.PNG)
 
 **Build:**
 
