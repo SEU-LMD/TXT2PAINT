@@ -5,12 +5,11 @@ sys.argv=['']
 sys.path.append("./python-3.5/lib/python3.5/site-packages")
 
 from matplotlib import pyplot as plt
-from matplotlib import animation as animation
-from mpl_toolkits.mplot3d import Axes3D
 import math
 #import xlwt
 
 
+    #将四元数转换成rpy
 def EulerAndQuaternionTransform(input_data):
     data_len = len(input_data)
     angle_is_not_rad = False
@@ -86,7 +85,7 @@ def paint(data):
         pitch.append(float(temp_data[-2]))
         yaw.append(float(temp_data[-1]))
 
-        #tx-ty 
+    #画实时二维轨迹图
         plt.plot(tx, ty, c='r')
         plt.xlabel('tx')
         plt.ylabel('tz')
@@ -97,7 +96,7 @@ def paint(data):
         plt.ioff()
     plt.show()
         
-        #三维轨迹图
+    #画三维轨迹图
         #fig = plt.figure()
         #axs = fig.gca(projection = '3d')
         #plt.clf()
@@ -111,6 +110,7 @@ def paint(data):
         #plt.ioff()
     #plt.show()
 
+    #画tx、ty、tz的散点图
         #fig1, axs = plt.subplots(3, 1)
         #axs[0].scatter(time, tx, marker='o', c='r', s=1)
         #axs[0].set_ylabel('tx(m)')
@@ -123,28 +123,8 @@ def paint(data):
         #plt.savefig('xyz scatter view.png')
     #plt.show()
         #time.sleep(0.001)
-    
-        #fig = plt.figure()
-        #axs = fig.gca(projection = '3d')
-        #axs.plot(tx, ty, tz)
-        #axs.set_xlabel('tx(m)')
-        #axs.set_ylabel('ty(m)')
-        #axs.set_zlabel('tz(m)')
-        #axs.set_title('pry line view')
-        #plt.savefig('pry line view.png')
-    #plt.show()
 
-        #tx-ty
-        #fig = plt.figure()
-        #plt.plot(tx, ty, c='r')
-        #point_ani,=plt.plot(tx[0], ty[0], "r-")
-        #text_pt = plt.text(3.5, 0.8, '', fontsize=16)
-        #plt.xlabel('tx')
-        #plt.ylabel('tz')
-        #plt.title('tx-ty')
-        #plt.savefig('tx-ty')
-    #plt.show()
-    
+    #画四元数的散点图
         #fig2, axs = plt.subplots(4, 1)
         #axs[0].scatter(time, qx, marker='o', c='r', s=1)
         #axs[0].set_ylabel('qx(m)')
@@ -159,6 +139,7 @@ def paint(data):
         #plt.savefig('qxyzw scatter view.png')
     #plt.show()
 
+    #画rpy的散点图
             #fig3, axs = plt.subplots(3, 1)
             #axs[0].scatter(time, roll, marker='o', c='r', s=1)
             #axs[0].set_ylabel('roll(m)')
@@ -171,6 +152,7 @@ def paint(data):
             #plt.savefig('pry scatter view.png')
             #plt.show()
 
+     #画tx、ty、tz的折线图
             #fig4, axs = plt.subplots(3, 1)
             #axs[0].plot(time, tx, c='r')
             #axs[0].set_ylabel('tx(m)')
@@ -184,6 +166,7 @@ def paint(data):
             #plt.show()
             #time.sleep(0.001)
 
+     #画四元数的折线图
             #fig5, axs = plt.subplots(4, 1)
             #axs[0].plot(time, qx, c='r')
             #axs[0].set_ylabel('qx(m)')
@@ -198,6 +181,7 @@ def paint(data):
             #plt.savefig('qxyzw line view.png')
      #plt.show()
 
+     #画rpy的折线图
             #fig6, axs = plt.subplots(3, 1)
             #axs[0].plot(time, roll, c='r')
             #axs[0].set_ylabel('roll(m)')

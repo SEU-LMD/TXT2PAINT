@@ -1,0 +1,1 @@
+  -L"C:/Users/29390/Desktop/2/TXT2PAINT/python-3.5/python3.5-lio"  -lpython3.5m -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
