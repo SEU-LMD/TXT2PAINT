@@ -36,7 +36,7 @@ make
 
 1.Modify CMakeLists.txt file as shown in the figure to generate an executable file "runpy" by callpythondraw.cpp .
 
-![](C:\Users\29390\Desktop\2.PNG)
+![](readme.assets/2-16656573848451.PNG)
 
 2.Build and Run the executable runpy.
 
@@ -53,7 +53,7 @@ cd ..
 
 1.Modify CMakeLists.txt file as shown in the figure to generate an executable file "runpy" by main.cpp .
 
-![](C:\Users\29390\Desktop\3.PNG)
+![](readme.assets/3.PNG)
 
 2.Build and Run the executable runpy
 
