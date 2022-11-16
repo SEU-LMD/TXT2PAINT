@@ -25,13 +25,13 @@ git clone https://github.com/SEU-LMD/TXT2PAINT.git
 
 1.Modify CMakeLists.txt file as shown in the figure to generate an  file "liotest.so" by callpythondraw.cpp .
 
-![img](README.assets/so.PNG)
+![img](https://github.com/SEU-LMD/TXT2PAINT/blob/master/picture/so.PNG)
 
 ## 3.2 Run through the libtest.so file
 
 1.Modify CMakeLists.txt file as shown in the figure to generate an executable file "runpy" by main.cpp .
 
-![img](README.assets/run-16684871027642.PNG)
+![img](https://github.com/SEU-LMD/TXT2PAINT/blob/master/picture/run.PNG)
 
 2.Build and Run the executable runpy
 
