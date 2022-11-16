@@ -17,7 +17,7 @@ git clone https://github.com/SEU-LMD/TXT2PAINT.git
 ```
 “/home/wxy/draw/x86_64-linux-gnu/python2.7/pyconfig.h”
 ```
-![](README.assets/1.PNG)
+![image](README.assets/1.PNG)
 
 # 3.Build and Run
 
@@ -25,13 +25,13 @@ git clone https://github.com/SEU-LMD/TXT2PAINT.git
 
 1.Modify CMakeLists.txt file as shown in the figure to generate an  file "liotest.so" by callpythondraw.cpp .
 
-![](README.assets/so.PNG)
+![image](README.assets/so.PNG)
 
 ## 3.2 Run through the libtest.so file
 
 1.Modify CMakeLists.txt file as shown in the figure to generate an executable file "runpy" by main.cpp .
 
-![](README.assets/run-16684871027642.PNG)
+![image](README.assets/run-16684871027642.PNG)
 
 2.Build and Run the executable runpy
 
