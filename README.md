@@ -12,48 +12,26 @@ git clone https://github.com/SEU-LMD/TXT2PAINT.git
 
 **Noted:**
 
-注意在将文件clone到本地后，首先更改/python-3.5/python3.5/pyconfig.h中的文件路径，该文件是去找寻/x86_64-linux-gnu/python3.5m/pyconfig.h这个文件，如图所示的文件路径为:
+注意在将文件clone到本地后，首先更改/python-2.7/python2.7/pyconfig.h中的文件路径，该文件是去找寻/x86_64-linux-gnu/python2.7/pyconfig.h这个文件，如图所示的文件路径为:
 
 ```
-“/home/wxy/draw/x86_64-linux-gnu/python3.5m/pyconfig.h”
+“/home/wxy/draw/x86_64-linux-gnu/python2.7/pyconfig.h”
 ```
-![image](picture/1.PNG)
-
-
-**Build:**
-
-```
-cd TXT2PAINT
-mkdir build
-cd build
-cmake ..
-make
-```
+![](README.assets/1-16684870640751.PNG)
 
 # 3.Build and Run
 
-## 3.1 Run directly
+## 3.1 Genetate dynamic link libraries
 
-1.Modify CMakeLists.txt file as shown in the figure to generate an executable file "runpy" by callpythondraw.cpp .
+1.Modify CMakeLists.txt file as shown in the figure to generate an  file "liotest.so" by callpythondraw.cpp .
 
-![](readme.assets/2-16656573848451.PNG)
-
-2.Build and Run the executable runpy.
-
-```
-mkdir build
-cd build
-cmake ..
-make
-cd ..
-./runpy
-```
+![](README.assets/so.PNG)
 
 ## 3.2 Run through the libtest.so file
 
 1.Modify CMakeLists.txt file as shown in the figure to generate an executable file "runpy" by main.cpp .
 
-![](readme.assets/3.PNG)
+![](README.assets/run-16684871027642.PNG)
 
 2.Build and Run the executable runpy
 

@@ -1,1 +1,0 @@
-/usr/bin/c++    -std=c++11 -pthread -g   CMakeFiles/runpy.dir/callpythondraw.cpp.o  -o ../runpy  -L/home/wxy/draw/python-3.5/python3.5-lio -rdynamic -lpython3.5m -Wl,-rpath,/home/wxy/draw/python-3.5/python3.5-lio 

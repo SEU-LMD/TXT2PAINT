@@ -1,10 +1,13 @@
+# coding:utf-8
 # import step, fix the "Module ‘sys‘ Has No Attribute ‘argv‘" bug.
 import sys
 sys.argv=['']
 # self-define python search path to local directory.
-sys.path.append("./python-3.5/lib/python3.5/site-packages")
+sys.path.append("./python-2.7/lib/site-packages")
 
 from matplotlib import pyplot as plt
+from matplotlib import animation as animation
+from mpl_toolkits.mplot3d import Axes3D
 import math
 #import xlwt
 

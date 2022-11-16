@@ -1,3 +1,0 @@
-C:/Users/29390/Desktop/2/TXT2PAINT/cmake-build-debug/CMakeFiles/runpy.dir
-C:/Users/29390/Desktop/2/TXT2PAINT/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/29390/Desktop/2/TXT2PAINT/cmake-build-debug/CMakeFiles/rebuild_cache.dir
