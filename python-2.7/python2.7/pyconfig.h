@@ -1,6 +1,6 @@
 #if defined(__linux__)
 # if defined(__x86_64__) && defined(__LP64__)
-#  include "/home/wxy/draw2.7/x86_64-linux-gnu/python2.7/pyconfig.h"
+#include "./x86_64-linux-gnu/python2.7/pyconfig.h"
 # elif defined(__x86_64__) && defined(__ILP32__)
 #  include <x86_64-linux-gnux32/python2.7/pyconfig.h>
 # elif defined(__i386__)

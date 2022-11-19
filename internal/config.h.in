@@ -1,0 +1,5 @@
+#ifndef PYTHONDRAW_CONFIG
+#define PYTHONDRAW_CONFIG
+#include <string>
+std::string PYTHONDRAW_CURPATH = "${CURPATH}";
+#endif

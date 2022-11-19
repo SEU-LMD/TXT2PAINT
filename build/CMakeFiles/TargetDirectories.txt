@@ -1,0 +1,3 @@
+/home/fyy/code/github/test/TXT2PAINT/build/CMakeFiles/test.dir
+/home/fyy/code/github/test/TXT2PAINT/build/CMakeFiles/edit_cache.dir
+/home/fyy/code/github/test/TXT2PAINT/build/CMakeFiles/rebuild_cache.dir

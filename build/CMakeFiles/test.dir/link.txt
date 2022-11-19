@@ -1,0 +1,1 @@
+/usr/bin/c++  -std=c++11 -pthread -O3 -DNDEBUG -rdynamic CMakeFiles/test.dir/example/test.cpp.o -o /home/fyy/code/github/test/TXT2PAINT/test  -Wl,-rpath,/home/fyy/code/github/test/TXT2PAINT/python-2.7/python2.7-lio /home/fyy/code/github/test/TXT2PAINT/python-2.7/python2.7-lio/libpython2.7.so 
